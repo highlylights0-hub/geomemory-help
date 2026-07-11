@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoMemory（ジオメモリー）公式ガイド — 使い方・楽しみ方</title>
+<meta name="description" content="道を覚えて、いつでも再生。GeoMemory（ジオメモリー）の基本の使い方・注意点・楽しみ方をやさしく紹介します。">
+<style>
+  /* ── 設計メモ ──
+     アプリ本体と同じ思想：大きな文字・押すだけ・迷わせない。
+     スマホ（アプリ内から開く）が主読者なのでモバイル最優先。
+     色はアプリの言葉に合わせる：シアン＝傾き/リンク系、緑＝決定/選択、黒丸＝ボタン。 */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cyan: #37b6e8;
+    --cyan-deep: #1a8fc0;
+    --green: #30b84d;
+    --ink: #2b2b2b;
+    --paper: #f7f5f0;
+    --card: #ffffff;
+  }
+  body {
+    font-family: -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.9;
+    font-size: 17px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px 80px; }
+
+  /* ヘッダー */
+  header {
+    text-align: center;
+    padding: 44px 16px 30px;
+    background: linear-gradient(180deg, #0e2233 0%, #163a52 100%);
+    color: #fff;
+  }
+  header .globe { font-size: 54px; display: block; margin-bottom: 6px; }
+  header h1 { font-size: 30px; letter-spacing: 1px; }
+  header .sub { color: #bfe6f8; font-size: 15px; margin-top: 8px; font-weight: 600; }
+
+  /* 目次 */
+  nav.toc {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 18px 22px;
+    margin: -22px auto 34px;
+    max-width: 640px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.10);
+    position: relative;
+  }
+  nav.toc a {
+    display: inline-block;
+    margin: 4px 10px 4px 0;
+    color: var(--cyan-deep);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(55,182,232,.35);
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 52px 0 18px;
+    padding-left: 14px;
+    border-left: 6px solid var(--cyan);
+  }
+  h3 { font-size: 19px; margin: 26px 0 10px; color: #14506e; }
+  p { margin-bottom: 14px; }
+
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  }
+
+  /* できることの一覧 */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .feature .icon { font-size: 30px; }
+  .feature b { display: block; font-size: 17px; margin: 4px 0 2px; }
+  .feature span { font-size: 14.5px; color: #555; line-height: 1.7; display: block; }
+
+  /* 手順ステップ */
+  .step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+  .step .num {
+    flex: 0 0 40px; height: 40px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    font-weight: 900; font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 3px;
+  }
+  .step .body b { font-size: 17.5px; }
+  .step .body p { margin: 2px 0 0; font-size: 15.5px; color: #444; }
+
+  /* アプリのメモ画面の再現（ダークカード） */
+  .memo-mock {
+    background: #111;
+    border-radius: 18px;
+    padding: 24px 20px;
+    color: #fff;
+    margin: 18px 0;
+  }
+  .memo-mock .memo-title { text-align: center; font-weight: 900; font-size: 19px; margin-bottom: 14px; }
+  .memo-mock .memo-body {
+    background: rgba(255,255,255,.08);
+    border: 1.5px solid rgba(89,199,250,.5);
+    border-radius: 14px;
+    padding: 16px;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 2.0;
+  }
+  .memo-mock .memo-body a { color: #59c7fa; text-decoration: underline; word-break: break-all; }
+  .memo-mock .caption { text-align: center; color: #9fb6c4; font-size: 13px; margin-top: 10px; }
+
+  /* 写真 */
+  figure { margin: 18px 0; }
+  figure img {
+    width: 100%; border-radius: 14px; display: block;
+    box-shadow: 0 3px 14px rgba(0,0,0,.15);
+  }
+  figcaption { font-size: 13.5px; color: #666; text-align: center; margin-top: 8px; }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .gallery figure { margin: 0; }
+  .gallery img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+  /* 注意点 */
+  .warn {
+    background: #fff7e8;
+    border-left: 6px solid #f0a500;
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+  }
+  .warn b { color: #9a6a00; }
+  .warn.big {
+    background: #fdecec;
+    border-left-color: #d64545;
+  }
+  .warn.big b { color: #a82222; }
+
+  /* FAQ */
+  details {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  summary { font-weight: 800; cursor: pointer; font-size: 16.5px; }
+  details p { margin: 10px 0 2px; font-size: 15.5px; color: #444; }
+
+  footer {
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    padding: 40px 16px 30px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="globe">🌏</span>
+  <h1>GeoMemory 公式ガイド</h1>
+  <div class="sub">道を覚えて、いつでも再生。<br>ジオメモリーの使い方・楽しみ方</div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <a href="#about">できること</a>
+  <a href="#basic">基本の使い方</a>
+  <a href="#nav">ナビ</a>
+  <a href="#memo">メモ活用術</a>
+  <a href="#fun">楽しみ方</a>
+  <a href="#care">注意点</a>
+  <a href="#faq">よくある質問</a>
+</nav>
+
+<!-- ═══════════ できること ═══════════ -->
+<h2 id="about">GeoMemoryでできること</h2>
+<p>GeoMemory（ジオメモリー）は、<b>あなたが実際に走った・歩いた道を「覚えて」、あとから地図の上で再生できる</b>アプリです。車でも、自転車でも、徒歩でも。覚えた道はあなたのiPhoneの中に大切に保存されます。</p>
+
+<div class="features">
+  <div class="feature"><span class="icon">🛣️</span><b>道を覚える</b><span>記録ボタンを押して移動するだけ。通った道が紫の線で残ります。</span></div>
+  <div class="feature"><span class="icon">▶️</span><b>道を再生する</b><span>覚えた道を、地図の上でもう一度なぞって再生。GeoMemory一番の見せ場です。</span></div>
+  <div class="feature"><span class="icon">🧭</span><b>ナビ＋音声案内</b><span>目的地までの案内と音声つき。案内中も道を覚えられます。</span></div>
+  <div class="feature"><span class="icon">🐾</span><b>走行の足あと</b><span>通った道がうっすら残る「無言の日記」。帰り道もひと目で分かります。</span></div>
+  <div class="feature"><span class="icon">✉️</span><b>場所メモ</b><span>道の途中の点に、絵文字つきのメモを残せます。リンクも貼れます（後述の活用術へ！）。</span></div>
+  <div class="feature"><span class="icon">🚗</span><b>自分らしい地図</b><span>自車アイコンの着せ替え、3D表示、コンパスやスピードの計器。見た目はあなたが選べます。</span></div>
+</div>
+
+<!-- ═══════════ 基本の使い方 ═══════════ -->
+<h2 id="basic">基本の使い方（3ステップ）</h2>
+<div class="card">
+  <div class="step"><div class="num">1</div><div class="body">
+    <b>記録ボタンを押して、出発</b>
+    <p>移動を始めると、通った道が地図に紫の線で描かれていきます。画面は見なくて大丈夫。ポケットに入れたままでも覚えます。</p>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <b>着いたら、記録を止める</b>
+    <p>その道は「覚えた道」に自動で保存されます。地名も自動で付くので、あとから見て分かります。</p>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <b>覚えた道を呼び出して ▶ 再生</b>
+    <p>スタートからゴールまで、地図の上をもう一度たどります。速さは1倍・2倍・4倍から選べます。「あの道どこだったかな」が一目で蘇ります。</p>
+  </div></div>
+</div>
+
+<h3>操作はぜんぶ「押すだけ」</h3>
+<p>拡大（＋）・縮小（−）・3D傾き・向きの切り替え——すべて<b>画面のボタンを押すだけ</b>で操作できます。むずかしいジェスチャー（指2本でひねる等）を覚える必要はありません。もちろん使える方はジェスチャーでも操作できます。</p>
+
+<!-- ═══════════ ナビ ═══════════ -->
+<h2 id="nav">ナビ（音声案内つき）</h2>
+<div class="card">
+  <p><b>目的地の決め方は3つ。</b>①名前で検索、②地図のお店や場所をタップ、③地図をなでて照準を合わせる「探索」。運転手さんとお客さん、二人で画面を覗き込みながら決められる作りです。</p>
+  <p><b>案内が始まると</b>、青い線がルートを示し、曲がり角の手前で音声がお知らせします。ナビ中も道の記録は同時にできます——<b>案内の青線の上を、自分の紫線が塗っていく</b>気持ちよさをぜひ。</p>
+  <p><b>自動3D</b>をオンにすると、直線では3Dで景色ゆたかに、曲がり角の手前ではゆっくり2Dに寝かせて交差点を見やすくします。カメラが自動で動いている間は、3D⇔2Dボタンが水色に点滅して「いま自動で動かしています」の合図を出します。</p>
+  <p>ルートを外れたときは、押しつけがましい自動リルートはせず、<b>お知らせした上であなたのタップで再検索</b>。道を選ぶのはいつも、道を知っているあなたです。</p>
+</div>
+
+<!-- ═══════════ メモ活用術 ═══════════ -->
+<h2 id="memo">メモ活用術 — リンクを貼れば、写真アルバムにもなる</h2>
+<p>覚えた道の点をタップすると、その場所に<b>絵文字つきのメモ</b>を残せます。ここからが本題。メモの中に書いたURL（ホームページの住所）は、<b>自動で「タップで開ける青いリンク」になります</b>。</p>
+
+<div class="memo-mock">
+  <div class="memo-title">🐷 点 12 番のメモ</div>
+  <div class="memo-body">
+    萩中公園・三匹の子豚の前。<br>
+    子どもが大よろこびした場所！<br>
+    ここで撮った写真はこちら↓<br>
+    <a href="https://drive.google.com/drive/folders/1as_KRMnlzCj2BkqOsVkOcfXNjVUc-ea7" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1as_…</a>
+  </div>
+  <div class="caption">▲ アプリのメモ画面のイメージ。青い部分をタップすると開きます（実際に開けます）</div>
+</div>
+
+<h3>やり方（写真を道に結びつける）</h3>
+<div class="card">
+  <div class="step"><div class="num">1</div><div class="body">
+    <b>写真をクラウドに置く</b>
+    <p>GoogleドライブやiCloud共有アルバムなど、お使いの写真置き場でOKです。</p>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <b>「共有リンクをコピー」する</b>
+    <p>写真やフォルダの共有メニューから、リンク（URL）をコピーします。</p>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <b>道の点のメモに貼り付ける</b>
+    <p>これで完成。あとからメモを開いてリンクをタップすれば、その場所で撮った写真がすぐ見られます。<b>道の記憶と写真の記憶がひとつに</b>つながります。</p>
+  </div></div>
+</div>
+
+<figure>
+  <img src="img/pigs.jpg" alt="萩中公園の三匹の子豚の像とレンガの家" loading="lazy">
+  <figcaption>たとえばこんな一枚を、その場所のメモに。（東京都大田区・萩中公園にて）</figcaption>
+</figure>
+
+<h3>ほかにもこんな使い方</h3>
+<div class="card">
+  <p>🍜 <b>お店のホームページやメニューのリンク</b>を貼れば「自分だけのグルメ地図」に。</p>
+  <p>🏥 <b>病院・施設の案内ページ</b>を貼れば、送り迎えの道がそのまま便利帳に。</p>
+  <p>📝 リンクなしでも、「ここは夕方混む」「この角は見通しが悪い」など、<b>道のコツの書き留め</b>にどうぞ。プロの知恵はメモから生まれます。</p>
+</div>
+
+<!-- ═══════════ 楽しみ方 ═══════════ -->
+<h2 id="fun">楽しみ方 — 散歩が、宝探しになる</h2>
+<p>GeoMemoryを持って歩くと、いつもの街が少し違って見えます。たとえばこの萩中公園（東京都大田区）には、こんな仲間たちが住んでいます。ぜんぶ<b>覚えた道とメモで「自分の地図」に描き込めます</b>。</p>
+
+<div class="gallery">
+  <figure><img src="img/sl.jpg" alt="萩中公園の蒸気機関車34号" loading="lazy"><figcaption>🚂 本物の蒸気機関車</figcaption></figure>
+  <figure><img src="img/cows.jpg" alt="草原でくつろぐ牛の像" loading="lazy"><figcaption>🐄 のんびり屋の牛たち</figcaption></figure>
+  <figure><img src="img/horse.jpg" alt="馬の像" loading="lazy"><figcaption>🐴 走り出しそうな馬</figcaption></figure>
+  <figure><img src="img/fountain.jpg" alt="公園の噴水" loading="lazy"><figcaption>⛲ 木かげの噴水</figcaption></figure>
+</div>
+
+<div class="card" style="margin-top:18px;">
+  <p>🐾 <b>「走行の足あと」</b>をオンにすると、記録ボタンを押していなくても、通った道がうっすら残ります（約500km分・古い順に消えます）。一日の終わりに眺めれば、<b>今日どこを通ったかの無言の日記</b>。迷路のような路地でも、来た道が薄く光っているので帰り道に迷いません。</p>
+  <p>🚕 <b>タクシー・配達のプロの方へ。</b>「一度通ったお客様の道」を覚えて再生できるのは、次に同じ場所へ呼ばれたときの大きな武器です。運行管理（拘束時間・連続運転・休憩）の見張り機能もあります。</p>
+  <p>👨‍👩‍👧 <b>ご家族で。</b>おじいちゃんの散歩道、子どもと見つけた近道、旅先のレンタカーの道。覚えた道は、あとで一緒に再生しながら「ここ行ったね」と話せる思い出になります。</p>
+</div>
+
+<!-- ═══════════ 注意点 ═══════════ -->
+<h2 id="care">注意点 — 安全がいちばん</h2>
+<div class="warn big">
+  <b>🚗 運転中に画面を操作しないでください。</b><br>
+  操作は必ず停車中に、または同乗者の方にお願いしてください。ナビの音声案内・道の記録は、画面を見なくても働き続けます。
+</div>
+<div class="warn">
+  <b>📡 GPSは万能ではありません。</b><br>
+  高いビルの谷間・トンネル・高架下では、位置や向きが一時的にずれることがあります。スピード表示や自車の向きが乱れても、少し走れば自然に戻ります。表示はあくまで参考に、実際の道路標識と目視を優先してください。
+</div>
+<div class="warn">
+  <b>🔋 長時間の記録は電池を使います。</b><br>
+  GPSを使い続けるため、長い記録では電池の減りが早くなります。車ではなるべく充電しながらのご利用をおすすめします。
+</div>
+<div class="warn">
+  <b>📍 位置情報の許可をonに。</b><br>
+  iPhoneの「設定 → プライバシーとセキュリティ → 位置情報サービス」でGeoMemoryを許可してください。記録の途中で許可が切れた場合は、アプリがお知らせします。
+</div>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<h2 id="faq">よくある質問</h2>
+<details>
+  <summary>覚えた道はどこに保存されますか？</summary>
+  <p>あなたのiPhoneの中に保存されます。会員登録は不要です。</p>
+</details>
+<details>
+  <summary>記録中にアプリが落ちたら、道は消えますか？</summary>
+  <p>いいえ。GeoMemoryは記録中、こまめに途中経過を退避しています。万一の強制終了でも、次の起動時に「そこまでの道」を救出して保存します。</p>
+</details>
+<details>
+  <summary>自転車でもナビは使えますか？</summary>
+  <p>ナビの自転車専用ルートは現在Appleの地図が日本で未対応のため、車・徒歩でのご案内になります。道の記録・再生・足あとは、自転車でも問題なく使えます。</p>
+</details>
+<details>
+  <summary>スピードや向きの表示が実際と違うときは？</summary>
+  <p>GPSの電波状況によるもので、故障ではありません。開けた場所で少し移動すると自然に直ります。</p>
+</details>
+<details>
+  <summary>地図が3Dのまま／2Dのままになってしまった</summary>
+  <p>右下の3D⇔2Dの丸ボタンを押すと、傾きスライダーで好きな角度に調整できます。設定した角度は次にアプリを開いたときも再現されます。</p>
+</details>
+
+<footer>
+  🌏 GeoMemory（ジオメモリー）<br>
+  写真：東京都大田区・萩中公園にて撮影<br>
+  このページは随時更新されます
+</footer>
+
+</div>
+</body>
+</html>
