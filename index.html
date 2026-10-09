@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GeoMemory（ジオメモリー）公式ガイド — 使い方・楽しみ方</title>
-<meta name="description" content="道を覚えて、いつでも再生。GeoMemory（ジオメモリー）の基本の使い方・注意点・楽しみ方をやさしく紹介します。">
+<title>TAXI PRO NAVI 公式ガイド</title>
+<meta name="description" content="乗務員のためのナビ TAXI PRO NAVI の使い方。行き先の決め方、高速の入口・出口の選び方、案内の声、銀座乗禁地区のお知らせ、道の手帳、デモ走行。">
 <style>
+
   /* ── 設計メモ ──
      アプリ本体と同じ思想：大きな文字・押すだけ・迷わせない。
      スマホ（アプリ内から開く）が主読者なのでモバイル最優先。
-     色はアプリの言葉に合わせる：シアン＝傾き/リンク系、緑＝決定/選択、黒丸＝ボタン。 */
+     色はアプリの言葉に合わせる：青＝ナビ・一般道、緑＝高速（標識の緑・白い字）、黒丸＝ボタン。
+     2026-10-09：GeoMemory から TAXI PRO NAVI へ。メモ活用術・楽しみ方（萩中公園の写真）を外し、乗務員のナビの使い方に書き直した。 */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --cyan: #37b6e8;
@@ -36,7 +38,8 @@
     color: #fff;
   }
   header .globe { font-size: 54px; display: block; margin-bottom: 6px; }
-  header h1 { font-size: 30px; letter-spacing: 1px; }
+  header h1 { font-size: 30px; letter-spacing: 1px; line-height: 1.4; }
+  header h1 small { font-size: 20px; letter-spacing: 2px; }
   header .sub { color: #bfe6f8; font-size: 15px; margin-top: 8px; font-weight: 600; }
 
   /* 目次 */
@@ -100,27 +103,6 @@
   .step .body b { font-size: 17.5px; }
   .step .body p { margin: 2px 0 0; font-size: 15.5px; color: #444; }
 
-  /* アプリのメモ画面の再現（ダークカード） */
-  .memo-mock {
-    background: #111;
-    border-radius: 18px;
-    padding: 24px 20px;
-    color: #fff;
-    margin: 18px 0;
-  }
-  .memo-mock .memo-title { text-align: center; font-weight: 900; font-size: 19px; margin-bottom: 14px; }
-  .memo-mock .memo-body {
-    background: rgba(255,255,255,.08);
-    border: 1.5px solid rgba(89,199,250,.5);
-    border-radius: 14px;
-    padding: 16px;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 2.0;
-  }
-  .memo-mock .memo-body a { color: #59c7fa; text-decoration: underline; word-break: break-all; }
-  .memo-mock .caption { text-align: center; color: #9fb6c4; font-size: 13px; margin-top: 10px; }
-
   /* 写真 */
   figure { margin: 18px 0; }
   figure img {
@@ -128,9 +110,6 @@
     box-shadow: 0 3px 14px rgba(0,0,0,.15);
   }
   figcaption { font-size: 13.5px; color: #666; text-align: center; margin-top: 8px; }
-  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .gallery figure { margin: 0; }
-  .gallery img { aspect-ratio: 4 / 3; object-fit: cover; }
 
   /* アプリのスクリーンショット（縦長・スマホ画面）は幅を絞って中央に。
      枠を濃くして「これはアプリの画面」と分かる姿にする。 */
@@ -171,202 +150,191 @@
     line-height: 1.8;
   }
 
-  /* ── 緑の背景セクション（2026-07-11・ユーザー発案）──
-     メモ活用術は公園の思い出の話なので、背景に萩中公園の原っぱをうっすら敷く。
-     文字の読みやすさが最優先：写真の上に薄い白のベール（92%）をかけ、
-     中のカードやメモ見本はそのまま乗せる。 */
-  .photo-section {
-    background:
-      linear-gradient(rgba(245, 250, 242, .90), rgba(245, 250, 242, .90)),
-      url('img/field.jpg') center / cover no-repeat;
-    border-radius: 22px;
-    padding: 10px 16px 22px;
-    margin: 44px -10px 0;
-    box-shadow: inset 0 0 0 1px rgba(48,184,77,.18);
+  /* 高速の章：標識の緑の地に白い字（アプリの高速の案内と同じ色） */
+  .hw {
+    background: #00784a;
+    color: #fff;
+    border-radius: 18px;
+    padding: 6px 18px 16px;
+    margin: 44px -6px 18px;
   }
-  .photo-section h2 { margin-top: 30px; border-left-color: var(--green); }
-  .photo-section h2:first-child { margin-top: 30px; }
+  .hw h2 { color: #fff; border-left-color: #fff; margin-top: 22px; }
+  .hw p { color: #eafff3; }
+  .hw .card { color: var(--ink); }
+  .hw .card p { color: #444; }
+  .sign {
+    display: inline-block;
+    background: #00784a; color: #fff;
+    border: 2px solid #fff; outline: 2px solid #00784a;
+    border-radius: 6px; padding: 0 8px; margin: 2px 2px;
+    font-weight: 800; font-size: 15px; line-height: 1.8;
+  }
+  .btn {
+    display: inline-block;
+    background: #3a3a3c; color: #fff;
+    border-radius: 999px; padding: 0 10px; margin: 0 2px;
+    font-weight: 700; font-size: 15px; line-height: 1.8;
+  }
+  ul.plain { list-style: none; }
+  ul.plain li { padding-left: 1.2em; text-indent: -1.2em; margin-bottom: 8px; }
+  ul.plain li::before { content: "・"; }
 </style>
 </head>
 <body>
 
 <header>
-  <span class="globe">🌏</span>
-  <h1>GeoMemory 公式ガイド</h1>
-  <div class="sub">道を覚えて、いつでも再生。<br>ジオメモリーの使い方・楽しみ方</div>
+  <span class="globe">🚕</span>
+  <h1>TAXI PRO NAVI<br><small>公式ガイド</small></h1>
+  <div class="sub">乗務員のためのナビ。<br>高速の入口も出口も、自分で選べる。</div>
 </header>
 
 <div class="wrap">
 
 <nav class="toc">
-  <a href="#about">できること</a>
-  <a href="#basic">基本の使い方</a>
-  <a href="#nav">ナビ</a>
-  <a href="#memo">メモ活用術</a>
-  <a href="#fun">楽しみ方</a>
-  <a href="#care">注意点</a>
+  <a href="#can">できること</a>
+  <a href="#go">行き先と［ゴー］</a>
+  <a href="#highway">高速の入口・出口</a>
+  <a href="#nav">ナビ中</a>
+  <a href="#voice">案内の声</a>
+  <a href="#ginza">銀座乗禁地区</a>
+  <a href="#book">道の手帳</a>
+  <a href="#demo">デモ走行</a>
+  <a href="#warn">注意点</a>
   <a href="#faq">よくある質問</a>
 </nav>
 
-<!-- ═══════════ できること ═══════════ -->
-<h2 id="about">GeoMemoryでできること</h2>
-<p>GeoMemory（ジオメモリー）は、<b>あなたが実際に走った・歩いた道を「覚えて」、あとから地図の上で再生できる</b>アプリです。車でも、自転車でも、徒歩でも。覚えた道はあなたのiPhoneの中に大切に保存されます。</p>
-
+<h2 id="can">TAXI PRO NAVI でできること</h2>
+<p>TAXI PRO NAVI（タクシー・プロ・ナビ）は、タクシーの乗務員が毎日の仕事で使うためのナビです。Apple の地図の道順を土台に、<b>お客様に言われた高速の入口・出口をそのまま選べる</b>のがいちばんの特長です。</p>
 <div class="features">
-  <div class="feature"><span class="icon">🛣️</span><b>道を覚える</b><span>記録ボタンを押して移動するだけ。通った道が紫の線で残ります。</span></div>
-  <div class="feature"><span class="icon">▶️</span><b>道を再生する</b><span>覚えた道を、地図の上でもう一度なぞって再生。GeoMemory一番の見せ場です。</span></div>
-  <div class="feature"><span class="icon">🧭</span><b>ナビ＋音声案内</b><span>目的地までの案内と音声つき。案内中も道を覚えられます。</span></div>
-  <div class="feature"><span class="icon">🐾</span><b>走行の足あと</b><span>通った道がうっすら残る「無言の日記」。帰り道もひと目で分かります。</span></div>
-  <div class="feature"><span class="icon">✉️</span><b>場所メモ</b><span>道の途中の点に、絵文字つきのメモを残せます。リンクも貼れます（後述の活用術へ！）。</span></div>
-  <div class="feature"><span class="icon">🚗</span><b>自分らしい地図</b><span>自車アイコンの着せ替え、3D表示、コンパスやスピードの計器。見た目はあなたが選べます。</span></div>
+  <div class="feature"><div class="icon">🛣️</div><b>高速の入口・出口を選べる</b><span>全国の高速に対応。乗る入口、降りる出口を、地図の緑の札から選べます。</span></div>
+  <div class="feature"><div class="icon">🗣️</div><b>聞きやすい声の案内</b><span>女性の声・男性の声から選べます。高速の分かれ道や車線も声でお知らせします。</span></div>
+  <div class="feature"><div class="icon">🚕</div><b>銀座乗禁地区のお知らせ</b><span>規制の時間に近づく・入ると、画面に帯でお知らせします。音は鳴らしません。</span></div>
+  <div class="feature"><div class="icon">🔍</div><b>迷わない検索</b><span>声でも文字でも。前に打った文字をすぐ呼び出して、直して検索できます。</span></div>
+  <div class="feature"><div class="icon">📒</div><b>道の手帳</b><span>走った道を記録して、あとで再生。仲間に送ることもできます。</span></div>
+  <div class="feature"><div class="icon">▶️</div><b>デモ走行</b><span>走らずに、道順と案内を机の上で確かめられます。</span></div>
 </div>
 
-<!-- ═══════════ 基本の使い方 ═══════════ -->
-<h2 id="basic">基本の使い方（3ステップ）</h2>
+<h2 id="go">行き先を決めて［ゴー］</h2>
 <div class="card">
-  <div class="step"><div class="num">1</div><div class="body">
-    <b>記録ボタンを押して、出発</b>
-    <p>移動を始めると、通った道が地図に紫の線で描かれていきます。画面は見なくて大丈夫。ポケットに入れたままでも覚えます。</p>
-  </div></div>
-  <div class="step"><div class="num">2</div><div class="body">
-    <b>着いたら、記録を止める</b>
-    <p>その道は「覚えた道」に自動で保存されます。地名も自動で付くので、あとから見て分かります。</p>
-  </div></div>
-  <div class="step"><div class="num">3</div><div class="body">
-    <b>覚えた道を呼び出して ▶ 再生</b>
-    <p>スタートからゴールまで、地図の上をもう一度たどります。速さは1倍・2倍・4倍から選べます。「あの道どこだったかな」が一目で蘇ります。</p>
-  </div></div>
+  <div class="step"><div class="num">1</div><div class="body"><b>下の［検索］を押す</b><p>住所・お店の名前を打つか、🎙️ を押して声で言います。地図のお店や場所をタップしても選べます。</p></div></div>
+  <div class="step"><div class="num">2</div><div class="body"><b>候補から行き先を選ぶ</b><p>道順の線が地図に出て、下に道順の窓が開きます。</p></div></div>
+  <div class="step"><div class="num">3</div><div class="body"><b>［ゴー］で案内が始まる</b><p>曲がり角の手前で、声と画面の帯でお知らせします。</p></div></div>
 </div>
 
-<figure class="shot">
-  <img src="img/shot_ginza.jpg" alt="銀座の3D地図の上を、覚えた道（紫の線）が再生されている実際の画面" loading="lazy">
-  <figcaption>▶ 再生中の実際の画面。銀座のビル街を、覚えた道（紫の線）がすーっと進んでいきます。下のバーで一時停止や速さの変更も。</figcaption>
-</figure>
+<h3>前に打った文字</h3>
+<p>地番を一つ打ち間違えても、最初から打ち直す必要はありません。検索した文字は、入力欄の下に<b>新しい順で 4 件</b>出ます。押すと入力欄に入るので、間違えた所だけ直して検索してください。要らない物は行の ✕ で消せます。</p>
 
-<h3>操作はぜんぶ「押すだけ」</h3>
-<p>拡大（＋）・縮小（−）・3D傾き・向きの切り替え——すべて<b>画面のボタンを押すだけ</b>で操作できます。むずかしいジェスチャー（指2本でひねる等）を覚える必要はありません。もちろん使える方はジェスチャーでも操作できます。</p>
+<h3>道順の窓のボタン</h3>
+<ul class="plain">
+  <li><span class="btn">高速なし</span> 高速を使わない道順に引き直します。</li>
+  <li><span class="btn">道順</span> 曲がる所の一覧を出します。高速の区間は緑、一般道は青の番号です。</li>
+  <li><span class="btn">経由地</span> 途中で寄る所を検索して足します。ナビの途中でも足せます。</li>
+  <li><span class="sign">高速</span> 乗る入口・降りる出口を選びます（次の章）。</li>
+</ul>
 
-<!-- ═══════════ ナビ ═══════════ -->
-<h2 id="nav">ナビ（音声案内つき）</h2>
-<div class="card">
-  <p><b>目的地の決め方は3つ。</b>①名前で検索、②地図のお店や場所をタップ、③地図をなでて照準を合わせる「探索」。運転手さんとお客さん、二人で画面を覗き込みながら決められる作りです。</p>
-  <p><b>案内が始まると</b>、青い線がルートを示し、曲がり角の手前で音声がお知らせします。ナビ中も道の記録は同時にできます——<b>案内の青線の上を、自分の紫線が塗っていく</b>気持ちよさをぜひ。</p>
-  <p><b>自動3D</b>をオンにすると、直線では3Dで景色ゆたかに、曲がり角の手前ではゆっくり2Dに寝かせて交差点を見やすくします。カメラが自動で動いている間は、3D⇔2Dボタンが水色に点滅して「いま自動で動かしています」の合図を出します。</p>
-  <p>ルートを外れたときは、押しつけがましい自動リルートはせず、<b>お知らせした上であなたのタップで再検索</b>。道を選ぶのはいつも、道を知っているあなたです。</p>
-</div>
-
-<!-- ═══════════ メモ活用術 ═══════════ -->
-<!-- 背景に萩中公園の原っぱ（ユーザー発案・2026-07-11）。白ベールで文字を守る。 -->
-<div class="photo-section">
-<h2 id="memo">メモ活用術 — リンクを貼れば、写真アルバムにもなる</h2>
-<p>覚えた道の点をタップすると、その場所に<b>絵文字つきのメモ</b>を残せます。ここからが本題。メモの中に書いたURL（ホームページの住所）は、<b>自動で「タップで開ける青いリンク」になります</b>。</p>
-
-<div class="memo-mock">
-  <div class="memo-title">🐷 点 12 番のメモ</div>
-  <div class="memo-body">
-    萩中公園・三匹の子豚の前。<br>
-    子どもが大よろこびした場所！<br>
-    ここで撮った写真はこちら↓<br>
-    <a href="https://drive.google.com/file/d/1euBC5ecFmNwXNcdG71EKwu1PmphpdwBX/view" target="_blank" rel="noopener">https://drive.google.com/file/d/1euBC5ec…</a>
+<section class="hw" id="highway">
+  <h2>高速の入口・出口を選ぶ</h2>
+  <p>「羽田から乗って、駒形で降りて」——お客様のご希望どおりの道を、そのまま引けます。</p>
+  <div class="card">
+    <div class="step"><div class="num">1</div><div class="body"><b>道順の窓の［高速］を押す</b><p>画面の上半分の地図に、入口が緑の札で立ちます。下には近い順の一覧が出ます。一覧には「上り・浜崎橋JCT方面」のように向きが付いています。</p></div></div>
+    <div class="step"><div class="num">2</div><div class="body"><b>入口を選ぶ</b><p>地図の札を押しても、一覧の行を押しても選べます。札を押すと、行き先に向かう側の向きが選ばれます。</p></div></div>
+    <div class="step"><div class="num">3</div><div class="body"><b>出口を選ぶ</b><p>行き先に近い順に、30 件まで並びます（その入口から行ける出口だけ）。出口を押すと、高速の上の道が緑の線で地図に出ます。</p></div></div>
+    <div class="step"><div class="num">4</div><div class="body"><b>［この道で決める］</b><p>入口までと出口から先は、Apple の地図の道順でつなぎます。</p></div></div>
   </div>
-  <div class="caption">▲ アプリのメモ画面のイメージ。青い部分をタップすると開きます（実際に開けます）</div>
-</div>
-
-<h3>やり方（写真を道に結びつける）</h3>
-<div class="card">
-  <div class="step"><div class="num">1</div><div class="body">
-    <b>写真をクラウドに置く</b>
-    <p>GoogleドライブやiCloud共有アルバムなど、お使いの写真置き場でOKです。</p>
-  </div></div>
-  <div class="step"><div class="num">2</div><div class="body">
-    <b>「共有リンクをコピー」する</b>
-    <p>写真やフォルダの共有メニューから、リンク（URL）をコピーします。</p>
-  </div></div>
-  <div class="step"><div class="num">3</div><div class="body">
-    <b>道の点のメモに貼り付ける</b>
-    <p>これで完成。あとからメモを開いてリンクをタップすれば、その場所で撮った写真がすぐ見られます。<b>道の記憶と写真の記憶がひとつに</b>つながります。</p>
-  </div></div>
-</div>
-
-<figure>
-  <img src="img/pigs.jpg" alt="萩中公園の三匹の子豚の像とレンガの家" loading="lazy">
-  <figcaption>たとえばこんな一枚を、その場所のメモに。（東京都大田区・萩中公園にて）</figcaption>
-</figure>
-
-<h3>ほかにもこんな使い方</h3>
-<div class="card">
-  <p>🍜 <b>お店のホームページやメニューのリンク</b>を貼れば「自分だけのグルメ地図」に。</p>
-  <p>🏥 <b>病院・施設の案内ページ</b>を貼れば、送り迎えの道がそのまま便利帳に。</p>
-  <p>📝 リンクなしでも、「ここは夕方混む」「この角は見通しが悪い」など、<b>道のコツの書き留め</b>にどうぞ。プロの知恵はメモから生まれます。</p>
-</div>
-</div><!-- /.photo-section -->
-
-<!-- ═══════════ 楽しみ方 ═══════════ -->
-<h2 id="fun">楽しみ方 — 散歩が、宝探しになる</h2>
-<p>GeoMemoryを持って歩くと、いつもの街が少し違って見えます。たとえばこの萩中公園（東京都大田区）には、こんな仲間たちが住んでいます。ぜんぶ<b>覚えた道とメモで「自分の地図」に描き込めます</b>。</p>
-
-<div class="gallery">
-  <figure><img src="img/sl.jpg" alt="萩中公園の蒸気機関車34号" loading="lazy"><figcaption>🚂 本物の蒸気機関車</figcaption></figure>
-  <figure><img src="img/cows.jpg" alt="草原でくつろぐ牛の像" loading="lazy"><figcaption>🐄 のんびり屋の牛たち</figcaption></figure>
-  <figure><img src="img/horse.jpg" alt="馬の像" loading="lazy"><figcaption>🐴 走り出しそうな馬</figcaption></figure>
-  <figure><img src="img/fountain.jpg" alt="公園の噴水" loading="lazy"><figcaption>⛲ 木かげの噴水</figcaption></figure>
-</div>
-
-<div class="card" style="margin-top:18px;">
-  <p>🐾 <b>「走行の足あと」</b>をオンにすると、記録ボタンを押していなくても、通った道がうっすら残ります（約500km分・古い順に消えます）。一日の終わりに眺めれば、<b>今日どこを通ったかの無言の日記</b>。迷路のような路地でも、来た道が薄く光っているので帰り道に迷いません。</p>
-  <p>🚕 <b>タクシー・配達のプロの方へ。</b>「一度通ったお客様の道」を覚えて再生できるのは、次に同じ場所へ呼ばれたときの大きな武器です。運行管理（拘束時間・連続運転・休憩）の見張り機能もあります。</p>
   <figure class="shot">
-    <img src="img/shot_shutoko.jpg" alt="首都高都心環状線の走行記録を、大手町の高層ビル群の中で再生している画面" loading="lazy">
-    <figcaption>道の定番・首都高もこの通り。大手町のビルの谷間を進む記録を再生中。</figcaption>
+    <img src="img/shot_highway_picker.jpg" alt="高速の入口・出口を選ぶ画面。地図に鈴ケ森入口と駒形出口の緑の札、その間の高速の道が緑の線" loading="lazy">
+    <figcaption>［高速］の選ぶ画面。蒲田から浅草寺へ、鈴ケ森から乗って駒形で降りる道。地図の緑の線が高速の上の道です。</figcaption>
   </figure>
-  <p>👨‍👩‍👧 <b>ご家族で。</b>おじいちゃんの散歩道、子どもと見つけた近道、旅先のレンタカーの道。覚えた道は、あとで一緒に再生しながら「ここ行ったね」と話せる思い出になります。</p>
+  <div class="card">
+    <p><b>取り返しのつかない間違いを防ぐ仕組み</b></p>
+    <ul class="plain">
+      <li>逆向きの入口を選ぶと、必ず念押しします（「生麦方向」を選んでしまった、を防ぎます）。</li>
+      <li>大きな遠回りになる入口・出口は、札も行も薄く出して「遠回り（約 +34 km）」と添えます。</li>
+      <li>廃止・閉鎖が決まっている出入口には、一覧に知らせを添えます。閉じた後は候補から外します。</li>
+    </ul>
+    <p>選びをやめるときは［選びを外す（Apple の道順に任せる）］を押します。</p>
+  </div>
+</section>
+
+<h2 id="nav">ナビ中</h2>
+<figure class="shot">
+  <img src="img/shot_highway_guide.jpg" alt="首都高速1号羽田線を走るナビの画面。上の帯は緑の地に白い字で「浜崎橋JCTで右車線を走行して首都高速都心環状線へ」" loading="lazy">
+  <figcaption>1号羽田線の上。道順の線も上の帯も、高速の区間は緑になります。</figcaption>
+</figure>
+<ul class="plain">
+  <li><b>高速は緑、一般道は青。</b>地図の線も、画面の上の帯も、高速の区間は緑の地に白い字になります。<br>例：<span class="sign">浜崎橋JCTで右車線を走行して首都高速都心環状線へ</span></li>
+  <li><b>声は「およそ 300 メートル先」「まもなく」の二回。</b>本線から側道へ寄る所も「左車線です」とお知らせします。</li>
+  <li><b>ルートを外れたら、自動でリルートします。</b>帯をタップすれば、すぐに引き直します。</li>
+  <li><b>走りながら地図を眺められます。</b>指で地図をずらしても自車へ引き戻されません。指を離して 8 秒で、自車の位置へ戻ります。</li>
+  <li><b>経由地は、ナビの途中でも足せます。</b>道順の窓の［経由地］から検索します。</li>
+</ul>
+
+<h2 id="voice">案内の声（女性｜男性）</h2>
+<p>⚙️設定 →「ナビの音声案内」で、<b>女性の声・男性の声</b>を選べます。［聞く］で試しに鳴らせます。声は VOICEVOX Nemo を使っています。</p>
+<div class="card">
+  <p>声を作るのが間に合わない時だけ、iPhone の声（選んだ声と同じ男女）が代わりに読みます。iPhone に「Kyoko（拡張）」を入れておくと、代わりの声も自然になります。</p>
+  <p style="font-size:15px;color:#555">入れ方：iPhone の設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 日本語 → Kyoko → 拡張</p>
 </div>
 
-<!-- ═══════════ 注意点 ═══════════ -->
-<h2 id="care">注意点 — 安全がいちばん</h2>
-<div class="warn big">
-  <b>🚗 運転中に画面を操作しないでください。</b><br>
-  操作は必ず停車中に、または同乗者の方にお願いしてください。ナビの音声案内・道の記録は、画面を見なくても働き続けます。
-</div>
-<div class="warn">
-  <b>📡 GPSは万能ではありません。</b><br>
-  高いビルの谷間・トンネル・高架下では、位置や向きが一時的にずれることがあります。スピード表示や自車の向きが乱れても、少し走れば自然に戻ります。表示はあくまで参考に、実際の道路標識と目視を優先してください。
-</div>
-<div class="warn">
-  <b>🔋 長時間の記録は電池を使います。</b><br>
-  GPSを使い続けるため、長い記録では電池の減りが早くなります。車ではなるべく充電しながらのご利用をおすすめします。
-</div>
-<div class="warn">
-  <b>📍 位置情報の許可をonに。</b><br>
-  iPhoneの「設定 → プライバシーとセキュリティ → 位置情報サービス」でGeoMemoryを許可してください。記録の途中で許可が切れた場合は、アプリがお知らせします。
-</div>
+<h2 id="ginza">銀座乗禁地区・空車通行止め</h2>
+<p>お客様を降ろして初めて「ここは乗禁地区だった」と気づく——それを防ぐためのお知らせです。</p>
+<ul class="plain">
+  <li><b>地図に薄い縞で出します。</b>線は東京タクシーセンターの公式ポスター（2026年1月30日版）に合わせています。</li>
+  <li><b>規制の時間（土日祝を除く 22時〜翌1時）</b>に近づく・入ると、検索欄の下に帯でお知らせします。音は鳴らしません。</li>
+  <li><b>ナビ中は控えめに。</b>実車で向かう時は、帯も縞も薄くして道順の邪魔をしません。</li>
+  <li><b>空車タクシー通行止め（群青・水色の囲い）。</b>ナビで着いたら 15 分は空車として扱い、囲いの中にいたら画面の一番下に帯を出します。</li>
+  <li>地図に出すかどうかは、⚙️設定の「乗禁地区を地図に出す」で切り替えられます。</li>
+</ul>
+<div class="warn"><b>お知らせは目安です。</b>実際の標識と交通規制に必ず従ってください。</div>
 
-<!-- ═══════════ FAQ ═══════════ -->
+<h2 id="book">道の手帳（記録・再生・送る）</h2>
+<div class="card">
+  <div class="step"><div class="num">1</div><div class="body"><b>右の［記録］を押して走る</b><p>通った道が紫の線で残ります。ポケットに入れたままでも記録します。</p></div></div>
+  <div class="step"><div class="num">2</div><div class="body"><b>止めて保存</b><p>地名が自動で付いて、道の手帳に入ります。</p></div></div>
+  <div class="step"><div class="num">3</div><div class="body"><b>左上の道の手帳から呼び出して ▶ 再生</b><p>「一度お送りしたお客様の道」を、次に呼ばれた時に見返せます。</p></div></div>
+</div>
+<ul class="plain">
+  <li><b>仲間に送る：</b>道の手帳の道は、リンクやファイルで送れます。受け取った道は、そのまま道の手帳に入ります。</li>
+  <li><b>点にメモ：</b>道の点を押すと「一方通行注意」「朝は混む」などのメモを残せます。</li>
+  <li><b>走行の足あと：</b>記録を押していなくても、通った道に小さな白い点が残ります（100 m ごと・約 500 km 分）。⚙️設定の「走行の足あと」で止めたり消したりできます。</li>
+</ul>
+
+<h2 id="demo">デモ走行</h2>
+<p>⚙️設定で「デモ走行」をオンにすると、道順の窓に［デモ］が出ます。押すと、道順の線の上を車が自分で走ります。案内の声・高速の緑・乗禁地区のお知らせを、走らずに確かめられます（一般道 時速 40 km・高速 時速 80 km を ×1／×4／×10 で早回し）。</p>
+<p>デモの間は本物の GPS を使わず、道の手帳や足あとにも残しません。お客様をお乗せする前に、初めての高速の道を下見するのにも使えます。</p>
+
+<h2 id="warn">注意点 — 安全がいちばん</h2>
+<div class="warn big"><b>🚗 運転中に画面を操作しないでください。</b><br>操作は必ず停車中に。案内の声と記録は、画面を見なくても働き続けます。</div>
+<div class="warn"><b>🛣️ 高速の地図データについて。</b><br>高速の入口・出口と高速の上の道は、OpenStreetMap のデータからアプリが作っています。新しい版を出すたびに作り直しますが、工事や通行止め・新しい出入口がすぐには反映されないことがあります。実際の標識を優先してください。</div>
+<div class="warn"><b>📡 GPS は万能ではありません。</b><br>高いビルの谷間・トンネル・高架の下では、位置や向きが一時的にずれることがあります。</div>
+<div class="warn"><b>🔋 充電しながらのご利用をおすすめします。</b><br>GPS を使い続けるため、電池の減りが早くなります。</div>
+
 <h2 id="faq">よくある質問</h2>
 <details>
-  <summary>覚えた道はどこに保存されますか？</summary>
-  <p>あなたのiPhoneの中に保存されます。会員登録は不要です。</p>
+  <summary>会員登録は要りますか？記録した道はどこに保存されますか？</summary>
+  <p>会員登録は要りません。道の手帳と足あとは、お使いの iPhone の中に保存されます。</p>
+</details>
+<details>
+  <summary>知っている入口・出口が一覧に出てきません</summary>
+  <p>地図データに名前が入っていない出入口や、地図データの抜けがあります。気づいた所を教えていただければ、次の版で直します。</p>
+</details>
+<details>
+  <summary>案内の声が、時々ちがう声になります</summary>
+  <p>声を作るのが間に合わない時に、iPhone の声が代わりに読んでいます。選んだ声と同じ男女の声を使います。「Kyoko（拡張）」を入れると自然になります（<a href="#voice">案内の声</a>）。</p>
 </details>
 <details>
   <summary>記録中にアプリが落ちたら、道は消えますか？</summary>
-  <p>いいえ。GeoMemoryは記録中、こまめに途中経過を退避しています。万一の強制終了でも、次の起動時に「そこまでの道」を救出して保存します。</p>
+  <p>いいえ。記録中はこまめに途中まで控えています。次に開いた時に「そこまでの道」を救い出して保存します。</p>
 </details>
 <details>
-  <summary>自転車でもナビは使えますか？</summary>
-  <p>ナビの自転車専用ルートは現在Appleの地図が日本で未対応のため、車・徒歩でのご案内になります。道の記録・再生・足あとは、自転車でも問題なく使えます。</p>
-</details>
-<details>
-  <summary>スピードや向きの表示が実際と違うときは？</summary>
-  <p>GPSの電波状況によるもので、故障ではありません。開けた場所で少し移動すると自然に直ります。</p>
-</details>
-<details>
-  <summary>地図が3Dのまま／2Dのままになってしまった</summary>
-  <p>右下の3D⇔2Dの丸ボタンを押すと、傾きスライダーで好きな角度に調整できます。設定した角度は次にアプリを開いたときも再現されます。</p>
+  <summary>地図が 3D のまま／2D のままになってしまった</summary>
+  <p>右の 3D⇔2D の丸ボタンを押すと、傾きを好きな角度に変えられます。</p>
 </details>
 
 <footer>
-  🌏 GeoMemory（ジオメモリー）<br>
-  写真：東京都大田区・萩中公園にて撮影<br>
+  🚕 TAXI PRO NAVI（タクシー・プロ・ナビ）<br>
+  案内の声：VOICEVOX Nemo<br>
+  高速の地図データ：© OpenStreetMap contributors（ODbL）<br>
   このページは随時更新されます
 </footer>
 
