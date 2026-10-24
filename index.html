@@ -181,6 +181,9 @@
   }
   ul.plain { list-style: none; }
   ul.plain li { padding-left: 1.2em; text-indent: -1.2em; margin-bottom: 8px; }
+  /* 2026-10-25：行の text-indent（−1.2em）は中の札（inline-block）にも引き継がれ、札の字が左へずれて
+     最初の字が隠れていた（［高速なし］が［速なし］に見える・博喜さんの iPhone で見つかった）。札の中は 0 に戻す。 */
+  ul.plain li .btn, ul.plain li .sign { text-indent: 0; }
   ul.plain li::before { content: "・"; }
 </style>
 </head>
