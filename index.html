@@ -21,7 +21,9 @@
      2026-11-07：v3.2〜v4.0。横向きの章（縦・横・兼用）・［声］の入切・窓が開いている間はボタンを窓の上へ・続きの矢印・
        ［情報］の天気と地震（雨雲・警報の表・天気はサブスクリプション）・催しの札も自車を隠さない。3.4（姉妹アプリから受け取る）は出していないので書かない。
      2026-11-08：v4.1。高速の通行止め（首都高の工事予定・NEXCO の発表）・橙の帯と［入口を変える］・選ぶ画面の 1→2→3 の段・
-       道順の窓の「入口 → 出口」の一行・横の選ぶ画面（左に一覧・右に地図）。出典に首都高の工事予定と NEXCO を足した。 */
+       道順の窓の「入口 → 出口」の一行・横の選ぶ画面（左に一覧・右に地図）。出典に首都高の工事予定と NEXCO を足した。
+     2026-11-08：「できること・できないこと」の表（そのまま／サブスクリプション・⭕️❌）。調査_乗務員向けと一般向けの機能と課金枠.md の 3-2 から。
+       お金の字は書かない（v2.4 からの決まり）。チャレンジ2026 のデータ（JR・私鉄・今夜の国際線・終電）は 2027/3/12 までと注に。 */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --cyan: #37b6e8;
@@ -87,6 +89,21 @@
     margin-bottom: 18px;
     box-shadow: 0 2px 10px rgba(0,0,0,.06);
   }
+
+  /* できること・できないことの表（⭕️❌） */
+  .yn { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--card);
+        border-radius: 16px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 10px; }
+  .yn th, .yn td { padding: 9px 8px; border-bottom: 1px solid rgba(0,0,0,.07); vertical-align: middle; line-height: 1.5; }
+  .yn thead th:not(:first-child) { font-size: 12px; padding: 8px 4px; white-space: nowrap; }
+  .yn thead th { background: #14506e; color: #fff; font-size: 14px; }
+  .yn thead th:first-child { text-align: left; }
+  .yn td:not(:first-child), .yn th:not(:first-child) { text-align: center; width: 6.5em; }
+  .yn tbody th { text-align: left; font-weight: 600; }
+  .yn tr.sub th { color: #00784a; }
+  .yn td small, .yn th small { display: block; font-size: 11px; color: #777; line-height: 1.3; font-weight: 400; }
+  .yn tr:last-child th, .yn tr:last-child td { border-bottom: none; }
+  .yn-note { font-size: 13px; color: #555; margin-bottom: 18px; }
+  @media (max-width: 480px) { .yn { font-size: 14px; } .yn td:not(:first-child), .yn th:not(:first-child) { width: 5.8em; } }
 
   /* できることの一覧 */
   .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -219,6 +236,7 @@
   <a href="#voice">案内の声</a>
   <a href="#ginza">銀座乗禁地区</a>
   <a href="#info">［情報］</a>
+  <a href="#hyou">できる・できない</a>
   <a href="#book">マイルート</a>
   <a href="#demo">デモ走行</a>
   <a href="#warn">注意点</a>
@@ -421,8 +439,38 @@
   <li><b>天気・地震。</b>気象庁の発表から、最近の地震（震度・震源・1都3県の揺れ）を見られます。震度 5 弱以上の地震・特別警報・今いる市区町村の警報は、カードの一番上に赤で出します。</li>
   <li><b>車いすの乗降。</b>UD タクシー（JPN TAXI）に車いすのお客様をお乗せする手順を、トヨタ公式の動画とホームページで見返せます。「スロープの格納」「車いすの固定」など手順の名前を押すと、その場面から再生します。2019年3月以降の車と、2019年2月までの車の両方があります。お客様の前で見返すのにも、前もって練習するのにも。</li>
 </ul>
+<div class="warn"><b>終電・運行・到着の時刻は目安です。</b>駅や空港の案内を優先してください。</div>
+
+<h2 id="hyou">できること・できないこと</h2>
+<p>アプリを入れたままで使える物と、サブスクリプションで使える物の一覧です。ナビの心臓部（行き先探し・声の案内・高速の入口と出口・通行止め・二点の道順）は、どなたでもお使いいただけます。</p>
+<table class="yn">
+  <thead><tr><th scope="col">できること</th><th scope="col">そのまま</th><th scope="col">サブスク<br>リプション</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">行き先を声と文字で探す・Look Around で確かめる</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">声の案内（女性｜男性・通りの名前で）</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">高速の入口・出口を自分で選ぶ（全国）</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">工事の通行止めの予定を道順に生かす（首都高・NEXCO）</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">二点の道順 A→B（道と時間・デモ・登録）</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">銀座乗禁地区・空車タクシー通行止めのお知らせ</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">電車の運行・止まった路線の帯<small>JR・私鉄の分は ※</small></th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">近くの駅の終電の札</th><td>⭕️<small>※</small></td><td>⭕️</td></tr>
+    <tr><th scope="row">羽田の今夜の国際線・到着</th><td>⭕️<small>※</small></td><td>⭕️<small>※</small></td></tr>
+    <tr><th scope="row">羽田の待機所と乗り場のカメラ・羽田からの定額運賃</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">催しの終わりの札</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">地震の一覧・危ない時の警報の帯</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">車いすの乗降の動画</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">マイルート（記録・再生・送る）・足あと・デモ走行・メモ</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr><th scope="row">縦・横・兼用の画面</th><td>⭕️</td><td>⭕️</td></tr>
+    <tr class="sub"><th scope="row">羽田の乗り場の波（1号〜4号・国際）・明日の朝</th><td>❌<small>見本だけ</small></td><td>⭕️</td></tr>
+    <tr class="sub"><th scope="row">タクシー運賃の目安（キロ数の概算＋高速代）</th><td>❌<small>見本だけ</small></td><td>⭕️</td></tr>
+    <tr class="sub"><th scope="row">高速代（首都高は料金表どおり・NEXCO は概算）</th><td>❌<small>「高速あり」だけ</small></td><td>⭕️</td></tr>
+    <tr class="sub"><th scope="row">運賃の地図</th><td>❌</td><td>⭕️</td></tr>
+    <tr class="sub"><th scope="row">雨雲を地図に重ねる・警報と注意報の表・今日明日の天気</th><td>❌<small>見本だけ</small></td><td>⭕️</td></tr>
+  </tbody>
+</table>
+<p class="yn-note">※ 2027年3月12日までの提供です（公共交通オープンデータチャレンジ2026 のデータ）。3月13日からの終電の札は、サブスクリプションで地下鉄などの駅に出ます。</p>
 <div class="card">
-  <p><b>サブスクリプションで使えるもの</b></p>
+  <p><b>サブスクリプションの中身</b></p>
   <ul class="plain">
     <li><b>乗り場の波・明日の朝</b> — ［情報］→［空港］の、国際線の下。羽田の 1号〜4号・国際（第5乗り場）に、これから 60 分のお客様の流れと、乗り場ごとの 90 分の波、次に着く便を出します。明日の朝 8 時までに着く便もまとめて見られます。</li>
     <li><b>雨雲・警報の表・天気</b> — ［情報］→［天気・地震］。雨雲を地図に重ねて、いまから 1 時間先まで（15 分ごと）見られます。1都3県の警報・注意報の表（今いる市区町村が一番上）と、今日・明日の天気もあります。</li>
@@ -431,7 +479,6 @@
   </ul>
   <p style="font-size:15px;color:#555">［情報］→［空港］の［開く］（道順の窓の運賃の欄の［開く］からも）から、月ごとの自動更新のサブスクリプションで使えます。機種を変えた時などは、購入の画面の「購入を復元」から。解約は iPhone の設定 → Apple アカウント → サブスクリプション から行えます。</p>
 </div>
-<div class="warn"><b>終電・運行・到着の時刻は目安です。</b>駅や空港の案内を優先してください。</div>
 
 <h2 id="book">マイルート（記録・再生・送る）</h2>
 <div class="card">
